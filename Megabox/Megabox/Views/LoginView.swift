@@ -40,16 +40,16 @@ struct LoginView: View {
             VStack(spacing: 4) {
                 TextField("아이디", text: $viewModel.loginModel.id)
                     .font(.medium16)
-                    .foregroundStyle(Color("gray03"))
+                    .foregroundStyle(.gray03)
                 Divider()
-                    .foregroundStyle(Color("gray02"))
+                    .foregroundStyle(.gray02)
             }
             VStack (spacing: 4) {
                 SecureField("비밀번호", text: $viewModel.loginModel.pwd)
                     .font(.medium16)
-                    .foregroundStyle(Color("gray03"))
+                    .foregroundStyle(.gray03)
                 Divider()
-                    .foregroundStyle(Color("gray02"))
+                    .foregroundStyle(.gray02)
             }
         }
     }
@@ -69,21 +69,21 @@ struct LoginView: View {
     }
     private var SignupButton: some View {
         Text("회원가입")
-            .foregroundStyle(Color("gray04"))
+            .foregroundStyle(.gray04)
             .font(.medium13)
             .padding(.top, 17)
             .padding(.bottom, 34)
     }
     private var SocialButton: some View {
         HStack(spacing: 40) {
-            Image("naverLogin")
-            Image("kakaoLogin")
-            Image("appleLogin")
+            Image(.naverLogin)
+            Image(.kakaoLogin)
+            Image(.appleLogin)
         }
         .padding(.bottom, 39)
     }
     private var PosterSection: some View {
-        Image("umcPoster")
+        Image(.umcPoster)
             .resizable()
             .scaledToFit()
     }

@@ -57,7 +57,7 @@ struct MemberInfoView: View {
                     .font(.medium18)
                     .foregroundStyle(.black)
                 Divider()
-                    .foregroundStyle(Color("gray02"))
+                    .foregroundStyle(.gray02)
             }
             
             VStack (alignment: .leading, spacing: 4) {
@@ -74,17 +74,17 @@ struct MemberInfoView: View {
                     label: {
                         Text("변경")
                             .font(.medium10)
-                            .foregroundStyle(Color("gray03"))
+                            .foregroundStyle(.gray03)
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)
                             .overlay {
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color("gray03"), lineWidth: 1)
+                                    .stroke(.gray03, lineWidth: 1)
                             }
                     }
                 }
                 Divider()
-                    .foregroundStyle(Color("gray02"))
+                    .foregroundStyle(.gray02)
                 
             }
         }

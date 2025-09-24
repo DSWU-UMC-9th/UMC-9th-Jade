@@ -39,7 +39,7 @@ struct MemberView: View {
                         .padding(.horizontal, 8)
                         .background {
                             RoundedRectangle(cornerRadius: 6)
-                                .fill(Color("tag"))
+                                .fill(.tag)
                         }
                 }
                 
@@ -54,7 +54,7 @@ struct MemberView: View {
                         .padding(.horizontal, 8)
                         .background{
                             RoundedRectangle(cornerRadius: 16)
-                                .fill(Color("gray07"))
+                                .fill(.gray07)
                         }
                 }
             }
@@ -62,7 +62,7 @@ struct MemberView: View {
             HStack {
                 Text("멤버십 포인트")
                     .font(.semiBold14)
-                    .foregroundStyle(Color("gray04"))
+                    .foregroundStyle(.gray04)
                 
                 Text("500P")
                     .font(.medium14)
@@ -111,7 +111,7 @@ struct MemberView: View {
         .padding(.vertical, 12)
         .background{
             RoundedRectangle(cornerRadius: 8)
-                .stroke(Color("gray02"), lineWidth: 1)
+                .stroke(.gray02, lineWidth: 1)
         }
         .frame(maxWidth: .infinity, maxHeight: 76)
     }
@@ -123,7 +123,7 @@ struct MemberView: View {
             VStack(spacing: 8) {
                 Text(title)
                     .font(.semiBold12)
-                    .foregroundStyle(Color("gray02"))
+                    .foregroundStyle(.gray02)
                     .fixedSize()
                 
                 Text(value)
