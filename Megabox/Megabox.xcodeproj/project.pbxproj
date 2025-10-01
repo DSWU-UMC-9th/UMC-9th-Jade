@@ -14,7 +14,7 @@
 		07A73CCB2E7C5508004C7B2B /* Exceptions for "Megabox" folder in "Megabox" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Resources/Info.plist,
 			);
 			target = 07A73BA92E7BAF1D004C7B2B /* Megabox */;
 		};
