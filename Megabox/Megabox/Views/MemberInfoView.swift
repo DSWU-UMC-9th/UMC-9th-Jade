@@ -23,6 +23,9 @@ struct MemberInfoView: View {
             Spacer()
         }
         .padding(.horizontal, 16)
+        .onAppear {
+            editName = userName
+        }
     }
     
     var Header: some View {
