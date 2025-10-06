@@ -11,23 +11,31 @@ struct HomeView: View {
     @State private var headerSelected = "홈"
     @State private var buttonSelected = "무비차트"
     @State private var movieModel = MovieViewModel()
+    @State private var detailViewModel = MovieDetailViewModel()
     
     let headerTabs = ["홈", "이벤트", "스토어", "선호극장"]
     let movieTabs = ["무비차트", "상영예정"]
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Header
-                Spacer()
-                MovieButtons
-                Spacer().frame(height: 25)
-                MovieChart
-                Spacer().frame(height: 38)
-                MovieFeed
+        NavigationStack {
+            ScrollView {
+                VStack {
+                    Header
+                    Spacer()
+                    MovieButtons
+                    Spacer().frame(height: 25)
+                    MovieChart
+                    Spacer().frame(height: 38)
+                    MovieFeed
+                }
+                .padding(.horizontal, 18)
+                .padding(.top, 22)
             }
-            .padding(.horizontal, 18)
-            .padding(.top, 22)
+            .navigationDestination(for: MovieModel.self) { movie in
+                if let detail = detailViewModel.getDetail(for: movie.movieName) {
+                    MovieDetailView(movie: detail)
+                }
+            }
         }
     }
     
@@ -79,7 +87,7 @@ struct HomeView: View {
     private var MovieChart: some View {
         ScrollView(.horizontal, showsIndicators: false){
             LazyHStack(spacing: 24) {
-                ForEach(movieModel.movies) { movie in
+                ForEach(movieModel.movieViewModel) { movie in
                     MovieCard(movie)
                 }
             }
@@ -121,29 +129,33 @@ struct HomeView: View {
     }
     
     private func MovieCard(_ movie: MovieModel) -> some View {
-        VStack(spacing: 8) {
-            ZStack {
-                Image(movie.movieImage).resizable().scaledToFill()
+        NavigationLink(value: movie) {
+            VStack(spacing: 8) {
+                ZStack {
+                    Image(movie.movieImage).resizable().scaledToFill()
+                }
+                Button(action: {}) {
+                    Text("바로 예매")
+                        .font(.medium16)
+                        .foregroundStyle(.purple03)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 9)
+                        .background {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(Color(.purple03))
+                        }
+                }
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(movie.movieName)
+                        .font(.bold22)
+                        .foregroundStyle(.black)
+                        .lineLimit(1)
+                    Text(movie.audienceText)
+                        .font(.medium18)
+                        .foregroundStyle(.black)
+                }
+                .frame(width: 150, alignment: .leading)
             }
-            Button(action: {}) {
-                Text("바로 예매")
-                    .font(.medium16)
-                    .foregroundStyle(.purple03)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 9)
-                    .background {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(.purple03))
-                    }
-            }
-            VStack(alignment: .leading, spacing: 4) {
-                Text(movie.movieName)
-                    .font(.bold22)
-                    .lineLimit(1)
-                Text(movie.audienceText)
-                    .font(.medium18)
-            }
-            .frame(width: 150, alignment: .leading)
         }
     }
     struct FeedRow: View {
