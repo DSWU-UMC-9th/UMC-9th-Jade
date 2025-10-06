@@ -12,20 +12,27 @@ struct LoginView: View {
     
     @AppStorage("userId") private var userId: String = ""
     @AppStorage("userPwd") private var userPwd: String = ""
+    
+    @State private var goToTab: Bool = false
 
     var body: some View {
-        VStack {
-            Header
-            Spacer()
-            Textfield
-            Spacer()
-            LoginButton
-            SignupButton
-            SocialButton
-            PosterSection
-
+        NavigationStack {
+            VStack {
+                Header
+                Spacer()
+                Textfield
+                Spacer()
+                LoginButton
+                SignupButton
+                SocialButton
+                PosterSection
+                
+            }
+            .padding(.horizontal, 16)
+            .navigationDestination(isPresented: $goToTab, destination: {
+                            MainTabView(viewModel: viewModel)
+                        })
         }
-        .padding(.horizontal, 16)
     }
     
     private var Header: some View {
@@ -57,6 +64,7 @@ struct LoginView: View {
         Button(action: {
             userId = viewModel.loginModel.id
             userPwd = viewModel.loginModel.pwd
+            goToTab = true
         }){
             Text("로그인")
                 .foregroundStyle(Color.white)

@@ -33,16 +33,6 @@ struct MemberInfoView: View {
             Text("회원정보 관리")
                 .font(.medium16)
                 .foregroundStyle(.black)
-            
-            HStack {
-                Button {
-                } label: {
-                    Image(systemName: "arrow.left")
-                        .foregroundStyle(.black)
-                        .frame(width: 26, height: 22)
-                }
-                Spacer()
-            }
         }
     }
     var BasicInfoText: some View {
