@@ -10,7 +10,7 @@ import Observation
 
 @Observable
 class MovieViewModel{
-let movies: [MovieModel] = [
+let movieViewModel: [MovieModel] = [
     .init(movieImage: "noOtherChoice", movieName: "어쩔수가 없다", movieSpectator: 20),
     .init(movieImage: "infinityCastle", movieName: "귀멸의 칼날", movieSpectator: 123),
     .init(movieImage: "f1", movieName: "F1 더 무비", movieSpectator: 45),

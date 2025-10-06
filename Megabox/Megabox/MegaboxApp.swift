@@ -11,9 +11,7 @@ import SwiftUI
 struct MegaboxApp: App {
     var body: some Scene {
         WindowGroup {
-            //LoginView()
-            //MemberInfoView()
-            //MemberView()
+            HomeView()
         }
     }
 }
