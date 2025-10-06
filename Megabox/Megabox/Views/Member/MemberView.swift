@@ -9,19 +9,27 @@ import SwiftUI
 
 struct MemberView: View {
     @AppStorage("userName") private var userName: String = ""
+    @State private var goToMemberInfo: Bool = false
+    let viewModel: LoginViewModel
+    
     var body: some View {
-        VStack {
-            Spacer().frame(height: 103)
-            ProfileHeader
-            Spacer().frame(height: 15)
-            ClubMembership
-            Spacer().frame(height: 33)
-            StatusInformation
-            Spacer().frame(height: 33)
-            ReservationList()
-            Spacer()
+        NavigationStack {
+            VStack {
+                Spacer().frame(height: 103)
+                ProfileHeader
+                Spacer().frame(height: 15)
+                ClubMembership
+                Spacer().frame(height: 33)
+                StatusInformation
+                Spacer().frame(height: 33)
+                ReservationList()
+                Spacer()
+            }
+            .padding(.horizontal, 16)
+            .navigationDestination(isPresented: $goToMemberInfo, destination: {
+                MemberInfoView()
+            })
         }
-        .padding(.horizontal, 16)
     }
     
     private var ProfileHeader: some View {
@@ -46,6 +54,7 @@ struct MemberView: View {
                 Spacer()
                 
                 Button {
+                    goToMemberInfo = true
                 } label: {
                     Text("회원정보")
                         .font(.semiBold14)
@@ -176,5 +185,5 @@ struct MemberView: View {
 }
 
 #Preview {
-    MemberView()
+    MemberView(viewModel: LoginViewModel())
 }
