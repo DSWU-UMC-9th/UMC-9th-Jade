@@ -7,13 +7,25 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		078D1EFB2EBB146A00493A7E /* Megabox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Megabox.xcodeproj; sourceTree = "<group>"; };
 		07A73BAA2E7BAF1D004C7B2B /* Megabox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Megabox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		0799269A2EBB80E700B1CDF4 /* Exceptions for "Megabox" folder in "Megabox" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 07A73BA92E7BAF1D004C7B2B /* Megabox */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		07A73BAC2E7BAF1D004C7B2B /* Megabox */ = {
+		078D20542EBB182C00493A7E /* Megabox */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				0799269A2EBB80E700B1CDF4 /* Exceptions for "Megabox" folder in "Megabox" target */,
+			);
 			path = Megabox;
 			sourceTree = "<group>";
 		};
@@ -30,18 +42,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		078D1F002EBB146A00493A7E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		07A73BA12E7BAF1D004C7B2B = {
 			isa = PBXGroup;
 			children = (
-				07A73BAC2E7BAF1D004C7B2B /* Megabox */,
 				07A73BAB2E7BAF1D004C7B2B /* Products */,
+				078D20542EBB182C00493A7E /* Megabox */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,7 +74,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				07A73BAC2E7BAF1D004C7B2B /* Megabox */,
+				078D20542EBB182C00493A7E /* Megabox */,
 			);
 			name = Megabox;
 			packageProductDependencies = (
@@ -105,12 +110,6 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 07A73BAB2E7BAF1D004C7B2B /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 078D1F002EBB146A00493A7E /* Products */;
-					ProjectRef = 078D1EFB2EBB146A00493A7E /* Megabox.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				07A73BA92E7BAF1D004C7B2B /* Megabox */,
@@ -276,6 +275,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -305,6 +305,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

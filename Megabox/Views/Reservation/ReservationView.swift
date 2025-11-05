@@ -10,6 +10,7 @@ import SwiftUI
 struct ReservationView: View {
     @StateObject private var vm = MovieViewModel()
     @StateObject private var reservationVM = ReservationViewModel()
+    @State private var isShowingSearchSheet = false
     
     var body: some View {
         NavigationStack {
@@ -18,8 +19,8 @@ struct ReservationView: View {
                     MovieSelectSection(
                         vm: vm,
                         selectedMovie: $reservationVM.selectedMovie,
-                        title: "어쩔수가 없다"
-                    ) { }
+                        title: reservationVM.selectedMovie?.movieName ?? "영화 선택"
+                    ) {isShowingSearchSheet = true }
                     .padding(.top, 16)
                     
                     VStack(alignment: .leading, spacing: 15) {
@@ -28,6 +29,12 @@ struct ReservationView: View {
                         TheaterScheduleSection(vm: reservationVM)
                     }
                     .padding(.bottom, 40)
+                }
+            }
+            .sheet(isPresented: $isShowingSearchSheet) {
+                MovieSearchView(vm: MovieSearchViewModel(allMovies: vm.movieViewModel)) { selected in
+                    reservationVM.selectedMovie = selected
+                    isShowingSearchSheet = false
                 }
             }
             .navigationTitle("영화별 예매")
