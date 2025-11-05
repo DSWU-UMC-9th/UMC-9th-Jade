@@ -7,25 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
+		078D1EFB2EBB146A00493A7E /* Megabox.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Megabox.xcodeproj; sourceTree = "<group>"; };
 		07A73BAA2E7BAF1D004C7B2B /* Megabox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Megabox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		07A73BF52E7BB10F004C7B2B /* Exceptions for "Megabox" folder in "Megabox" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 07A73BA92E7BAF1D004C7B2B /* Megabox */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		07A73BAC2E7BAF1D004C7B2B /* Megabox */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				07A73BF52E7BB10F004C7B2B /* Exceptions for "Megabox" folder in "Megabox" target */,
-			);
 			path = Megabox;
 			sourceTree = "<group>";
 		};
@@ -42,6 +30,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		078D1F002EBB146A00493A7E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		07A73BA12E7BAF1D004C7B2B = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +105,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 07A73BAB2E7BAF1D004C7B2B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 078D1F002EBB146A00493A7E /* Products */;
+					ProjectRef = 078D1EFB2EBB146A00493A7E /* Megabox.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				07A73BA92E7BAF1D004C7B2B /* Megabox */,
