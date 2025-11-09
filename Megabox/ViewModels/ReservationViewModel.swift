@@ -17,36 +17,44 @@ struct WeekDay: Identifiable, Equatable {
     let weekday: Int
 }
 
+@MainActor
 final class ReservationViewModel: ObservableObject {
+    @Published var allMovies: [Movie] = []
     @Published var selectedMovie: MovieModel? = nil
     @Published var selectedTheaters: [String] = []
     @Published var selectedDate: Date? = nil
     @Published var weekDays: [WeekDay] = []
+    @Published var filteredSchedules: [Area] = []
     @Published var showScreenInfo = false
     
     private var cancellables = Set<AnyCancellable>()
-    
+
     init() {
         generateWeekDays()
         setupBindings()
+        Task {
+            await loadMovieSchedules()
+            autoSelectLatestDate()
+        }
     }
-    
+
     private func setupBindings() {
         Publishers.CombineLatest3($selectedMovie, $selectedTheaters, $selectedDate)
-            .map { movie, theaters, date in
-                return movie != nil && !theaters.isEmpty && date != nil
+            .sink { [weak self] _, _, _ in
+                self?.applyFilter()
             }
-            .assign(to: &$showScreenInfo)
+            .store(in: &cancellables)
     }
-    
+
     func toggleTheater(_ theater: String) {
         if selectedTheaters.contains(theater) {
             selectedTheaters.removeAll { $0 == theater }
         } else {
             selectedTheaters.append(theater)
         }
+        applyFilter()
     }
-    
+
     func generateWeekDays() {
         let calendar = Calendar.current
         let formatter = DateFormatter()
@@ -67,9 +75,67 @@ final class ReservationViewModel: ObservableObject {
             )
         }
     }
-    
+
     func selectDate(_ date: Date) {
-        guard !selectedTheaters.isEmpty else { return }
         selectedDate = date
+        applyFilter()
     }
+
+    // MARK: - JSON 로드
+    func loadMovieSchedules() async {
+        guard let url = Bundle.main.url(forResource: "MovieSchedule", withExtension: "json") else {
+            print("JSON 파일을 찾을 수 없습니다.")
+            return
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            let decoded = try JSONDecoder().decode(MovieScheduleResponseDTO.self, from: data)
+            allMovies = decoded.data.movies.map { MovieMapper.toDomain(from: $0) }
+            print("JSON 로드 성공: \(allMovies.count)편")
+        } catch {
+            print("JSON 로드 실패:", error)
+        }
+    }
+
+    // MARK: - 최신 날짜 자동 선택
+    private func autoSelectLatestDate() {
+        guard let latestDate = allMovies
+            .flatMap({ $0.schedules.map { $0.date } })
+            .sorted(by: >)
+            .first else { return }
+        selectedDate = latestDate
+    }
+
+    // MARK: - 필터링 로직
+    private func applyFilter() {
+        guard
+            let selectedMovie = selectedMovie,
+            let movie = allMovies.first(where: {
+                $0.title.replacingOccurrences(of: " ", with: "") ==
+                selectedMovie.movieName.replacingOccurrences(of: " ", with: "")
+            }),
+            let selectedDate = selectedDate
+        else {
+            filteredSchedules = []
+            showScreenInfo = false
+            return
+        }
+
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd"
+
+        if let schedule = movie.schedules.first(where: {
+            f.string(from: $0.date) == f.string(from: selectedDate)
+        }) {
+            let filteredAreas = schedule.areas.filter { area in
+                selectedTheaters.contains { $0.contains(area.name) }
+            }
+            filteredSchedules = filteredAreas
+            showScreenInfo = !filteredAreas.isEmpty
+        } else {
+            filteredSchedules = []
+            showScreenInfo = false
+        }
+    }
+
 }
